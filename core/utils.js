@@ -22,7 +22,7 @@ export default class Utils {
     if (seconds < 10) seconds = `0${seconds}`
 
     // Возвращение строки
-    return {hours: hours, minutes: minutes, seconds: seconds}
+    return { hours: hours, minutes: minutes, seconds: seconds }
   }
 
   /** Возвращает объект с датой */
@@ -38,6 +38,6 @@ export default class Utils {
     if (day < 10) day = '0' + day
 
     // Возвращение строки
-    return {day: day, month: month, year: year}
+    return { day: day, month: month, year: year }
   }
 }

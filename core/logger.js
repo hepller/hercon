@@ -82,6 +82,6 @@ export default class Logger {
    * @param {string} text Текст ошибки
    */
   static logError(text) {
-    logData('WARN', text, '\u001B[31m')
+    logData('ERRO', text, '\u001B[31m')
   }
 }

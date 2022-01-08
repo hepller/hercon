@@ -15,7 +15,7 @@ const description = 'Удаление сервера'
 const usage = '<название>'
 
 // Функция команды
-async function execute(ctx, {Keyboard, db}) {
+async function execute(ctx, { Keyboard, db }) {
 
   // Сообщение о некорректном использовании
   if (!ctx.args[0]) return ctx.reply('⛔ Вы не указали название сервера который необходимо удалить')
@@ -34,7 +34,7 @@ async function execute(ctx, {Keyboard, db}) {
   ])
 
   // Сообщение об отсутстви сервера с указанным названием
-  if (!db.data.servers.find(server => server.name == ctx.args[0])) return ctx.reply(`⚠ Сервера с названием <<${ctx.args[0]}>> не существует`, {keyboard: keyboard.inline(true)})
+  if (!db.data.servers.find(server => server.name == ctx.args[0])) return ctx.reply(`⚠ Сервера с названием <<${ctx.args[0]}>> не существует`, { keyboard: keyboard.inline(true) })
 
   // Фильтрация серверов (удаление)
   db.data.servers = db.data.servers.filter(server => server.name != ctx.args[0])
@@ -47,4 +47,4 @@ async function execute(ctx, {Keyboard, db}) {
 }
 
 // Экспорт команды
-export default {aliases, description, usage, execute}
+export default { aliases, description, usage, execute }

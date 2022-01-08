@@ -12,7 +12,7 @@ const aliases = ['aliases', 'алиасы']
 const description = 'Алиасы для команд'
 
 // Функция команды
-async function execute(ctx, {commands, config}) {
+async function execute(ctx, { commands, config }) {
 
   // Отправка сообщения
   ctx.reply([
@@ -23,4 +23,4 @@ async function execute(ctx, {commands, config}) {
 }
 
 // Экспорт команды
-export default {aliases, description, execute}
+export default { aliases, description, execute }

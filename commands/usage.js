@@ -6,7 +6,7 @@
  */
 
 // Алиасы команды
-const aliases = ['help', 'помощь', 'usage', 'использование']
+const aliases = ['usage', 'использование', 'help', 'помощь']
 
 // Описание команды
 const description = 'Помощь по команде'
@@ -15,7 +15,7 @@ const description = 'Помощь по команде'
 const usage = '<команда>'
 
 // Функция команды
-async function execute(ctx, {Keyboard, commands, config}) {
+async function execute(ctx, { Keyboard, commands, config }) {
 
   // Создание клавиатуры
   const keyboard = Keyboard.keyboard([
@@ -25,16 +25,16 @@ async function execute(ctx, {Keyboard, commands, config}) {
         command: 'commands'
       }
     })
-  ])
+  ]).inline(true)
 
   // Проверка на наличие аргумента
-  if (!ctx.args[0]) return ctx.reply('⛔ Укажите команду о которой необходимо получить информацию', {keyboard: keyboard.inline(true)})
+  if (!ctx.args[0]) return ctx.reply('⛔ Укажите команду о которой необходимо получить информацию', { keyboard: keyboard })
 
   // Получение объекта команды по алиасам
   const command = commands.find(cmd => cmd.aliases.includes(ctx.args[0]))
 
   // Ошибка при отсутствии указанной команды
-  if (!command) return ctx.reply(`⚠ Команды <<${ctx.args[0]}>> не существует`, {keyboard: keyboard.inline(true)})
+  if (!command) return ctx.reply(`⚠ Команды <<${ctx.args[0]}>> не существует`, { keyboard: keyboard })
 
   // Отправка сообщения
   ctx.reply([
@@ -45,4 +45,4 @@ async function execute(ctx, {Keyboard, commands, config}) {
 }
 
 // Экспорт команды
-export default {aliases, description, usage, execute}
+export default { aliases, description, usage, execute }

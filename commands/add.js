@@ -15,7 +15,7 @@ const description = 'Добавление сервера'
 const usage = '<название> <хост>:<порт> <пароль>'
 
 // Функция команды
-async function execute(ctx, {Keyboard, db}) {
+async function execute(ctx, { Keyboard, db }) {
 
   // Создание клавиатуры
   const keyboard = Keyboard.keyboard([
@@ -41,7 +41,7 @@ async function execute(ctx, {Keyboard, db}) {
   if (db.data.servers.find(server => server.name == ctx.args[0])) return ctx.reply(`⚠ Сервер с названием <<${ctx.args[0]}>> уже добавлен`)
 
   // Добавление сервера в БД
-  db.data.servers.push({name: ctx.args[0], host: host, port: Number(port), password: ctx.args[2]})
+  db.data.servers.push({ name: ctx.args[0], host: host, port: Number(port), password: ctx.args[2] })
 
   // Сохранение БД
   await db.write()
@@ -51,4 +51,4 @@ async function execute(ctx, {Keyboard, db}) {
 }
 
 // Экспорт команды
-export default {aliases, description, usage, execute}
+export default { aliases, description, usage, execute }

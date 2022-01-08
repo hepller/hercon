@@ -6,13 +6,13 @@
  */
 
 // Алиасы команды
-const aliases = ['servers', 'servs', 'сервера', 'сервы']
+const aliases = ['servers', 'servs', 'сервера']
 
 // Описание команды
 const description = 'Список серверов'
 
 // Функция команды
-async function execute(ctx, {db}) {
+async function execute(ctx, { db }) {
 
   // Отправка сообщения пользователю
   ctx.reply([
@@ -23,4 +23,4 @@ async function execute(ctx, {db}) {
 }
 
 // Экспорт команды
-export default {aliases, description, execute}
+export default { aliases, description, execute }

@@ -22,15 +22,7 @@ const config = YAML.parse(readFileSync('config.yml', 'utf8'))
 const project = JSON.parse(readFileSync('package.json', 'utf8'))
 
 // Инициализация vk-io
-const vk = new VK(config.longpoll.group_id
-
-  // При работе в группе
-  ? {token: config.longpoll.token, v: config.longpoll.version, pollingGroupId: config.longpoll.group_id}
-
-  // При работе на странице
-  : {token: config.longpoll.token, v: config.longpoll.version}
-)
-
+const vk = new VK({ token: config.longpoll.token, pollingGroupId: config.longpoll.group_id, v: config.longpoll.version })
 
 // Инициализация lowdb
 const adapter = new JSONFile('servers.json')
@@ -39,7 +31,7 @@ const db = new Low(adapter)
 // Чтение БД
 await db.read()
 
-// Добавление массива серверов (при отсутствии)
+// Добавление массива серверов в БД (при отсутствии)
 db.data ||= {servers: []}
 
 // Сохранение БД
@@ -106,14 +98,11 @@ vk.updates.on('message_new', ctx => {
   // Определение команды в payload (для логирования)
   const payload_command = ctx.messagePayload?.command ? `(${ctx.messagePayload?.command})` : ''
 
-  // Заполнитель пустых полей
-  ctx.fields_placeholder = '<не_найдено>'
-
   // Сообщение в лог о написании команды
   Logger.logInfo(`${is_from_chat}${ctx.senderId} -> ${ctx.text} ${payload_command}`)
 
   // Выполнение команды
-  command.execute(ctx, {Logger, vk, Keyboard, Rcon, db, config, commands, command})
+  command.execute(ctx, { Logger, vk, Keyboard, Rcon, db, config, commands, command })
 
     // Обработка возможных ошибок
     .catch(error => {
@@ -126,8 +115,5 @@ vk.updates.on('message_new', ctx => {
     })
 })
 
-// Логирование неперехваченных исключений
-process.on('uncaughtException', error => Logger.logError(error.stack))
-
-// Логирование необработанных ошибок (promise error)
-process.on('unhandledRejection', error => Logger.logError(error.stack))
+// Обработка ошибок бота -> логирование
+process.on('uncaughtException', (error, origin) => Logger.logError(`${origin} -> ${error.stack}`))

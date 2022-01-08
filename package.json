@@ -1,6 +1,6 @@
 {
   "name": "hercon",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "VK RCON bot for Minecraft servers",
   "main": "core/core.js",
   "type": "module",

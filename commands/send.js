@@ -6,7 +6,7 @@
  */
 
 // Алиасы команды
-const aliases = ['send', 'отправить']
+const aliases = ['send', 'execute', 'exec', 'cmd', 'rcon', 'отправить', 'выполнить', 'ркон']
 
 // Описание команды
 const description = 'Отправка команды на сервер'
@@ -15,7 +15,7 @@ const description = 'Отправка команды на сервер'
 const usage = '<название> <команда>'
 
 // Функция команды
-async function execute(ctx, {Logger, Rcon, db}) {
+async function execute(ctx, { Logger, Rcon, db }) {
 
   // Проверка на наличие указанного сервера
   if (!ctx.args[0]) return ctx.reply('⛔ Вы не указали название сервера')
@@ -48,7 +48,7 @@ async function execute(ctx, {Logger, Rcon, db}) {
     ctx.reply([
       '💾 Ответ сервера:',
       '',
-      response.replace(/§./g, '') || ctx.fields_placeholder
+      response.replace(/§./g, '') || 'Сервер не вернул ответ'
     ].join('\n'))
 
     // Отключение от сервера
@@ -67,4 +67,4 @@ async function execute(ctx, {Logger, Rcon, db}) {
 }
 
 // Экспорт команды
-export default {aliases, description, usage, execute}
+export default { aliases, description, usage, execute }
