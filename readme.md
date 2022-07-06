@@ -1,5 +1,7 @@
 # Hercon ![Release](https://img.shields.io/github/v/release/hepller/hercon)
 
+## ⚠ СТАРЫЙ ПРОЕКТ
+
 > RCON бот ВКонтакте
 
 ![Size](https://img.shields.io/github/repo-size/hepller/hercon)
